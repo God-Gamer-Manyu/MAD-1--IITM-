@@ -19,9 +19,8 @@ jobs:
         id: cache
         uses: actions/cache@v4
         with:
-          path: |
-            node_modules
+          path: node_modules
           key: cache-c9b44c9
 
       - name: prime-cache-c9b44c9
-        run: "echo \"Cache hit: ${{ steps.cache.outputs.cache-hit }}\"
+        run: echo "Cache hit: ${{ steps.cache.outputs['cache-hit'] }}"
