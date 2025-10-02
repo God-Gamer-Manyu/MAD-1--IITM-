@@ -1,12 +1,13 @@
 # Speed up your CI by adding caching. 
 # Create a GitHub Actions workflow that uses actions/cache@v4 (or newer) to cache dependencies. 
+
 name: Cache Dependencies
 
 on:
-    push:
-        branches:
-            - main
-    pull_request:
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
   build:
@@ -23,4 +24,4 @@ jobs:
           key: cache-c9b44c9
 
       - name: prime-cache-c9b44c9
-        run: echo "Cache hit: ${{ steps.cache.outputs['cache-hit'] }}"
+        run: echo "Cache hit ${{ steps.cache.outputs['cache-hit'] }}"
