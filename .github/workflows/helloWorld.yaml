@@ -1,0 +1,8 @@
+name: Print Hello World
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 24f3001383@ds.study.iitm.ac.in
+        run: echo "Hello, world!"
