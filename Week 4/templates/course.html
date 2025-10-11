@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Course Data</title>
+  </head>
+  <body>
+    {% if error %}
+        <h1>Wrong Inputs</h1>
+        <p style="color: red">Something went wrong: {{ error }}</p>
+        <p><a href="/">Back</a></p>
+    {% else %}
+        <h1>Course Details</h1>
+    <table border="2" id="course-details-table">
+        <tr>
+            <th>Average Marks</th>
+            <th>Maximum Marks</th>
+        </tr>
+          <tr>
+            <td>{{ "%.2f"|format(avg) }}</td>
+            <td>{{ maxm }}</td>
+        </tr>
+      </table>
+      {% if img_path %}
+        <div>
+          <img src="{{ img_path }}" alt="Marks distribution" />
+        </div>
+      {% endif %}
+      <p><a href="/">Back</a></p>
+    {% endif %}
+  </body>
+</html>
