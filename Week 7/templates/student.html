@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Student Details{% endblock %}
+{% block content %}
+  {% if error %}
+    <div>{{ error }}</div>
+    <p><a href="/">Go Back</a></p>
+  {% else %}
+    <h1 style="text-align:center;">Student Details</h1>
+
+    <table id="student-detail">
+      <thead>
+        <tr><th>Roll Number</th><th>First Name</th><th>Last Name</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ roll_number }}</td>
+          {% set parts = student_name.split(' ', 1) %}
+          <td>{{ parts[0] if parts else student_name }}</td>
+          <td>{{ parts[1] if parts|length > 1 else '' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="text-align:center;">Enrollment list</h3>
+    <table id="student-enrollments">
+      <thead>
+        <tr><th>SNo</th><th>Course Code</th><th>Course Name</th><th>Course Description</th><th>Actions</th></tr>
+      </thead>
+      <tbody>
+        {% if details and details|length > 0 %}
+          {% for d in details %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td><a href="/course/{{ d.course_id }}">{{ d.course_code }}</a></td>
+              <td>{{ d.course_name }}</td>
+              <td>{{ d.course_description or '' }}</td>
+              <td><a href="/student/{{ student_id }}/withdraw/{{ d.course_id }}">Withdraw</a></td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr><td colspan="5">No courses enrolled</td></tr>
+        {% endif %}
+      </tbody>
+    </table>
+
+    <p><a href="/">Go Back</a></p>
+  {% endif %}
+{% endblock %}

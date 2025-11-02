@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Enrollments{% endblock %}
+{% block content %}
+  <div style="text-align:right"><a href="/">Home</a></div>
+  <h1>Enrollment list</h1>
+  {% if not enrollments %}
+    <p>No enrollments</p>
+    <p><a href="/enrollments/add">+ Add Enrollment</a></p>
+  {% else %}
+    <table>
+      <thead>
+        <tr><th>SNo</th><th>Student</th><th>Student Name</th><th>Course</th><th>Course Name</th><th>Actions</th></tr>
+      </thead>
+      <tbody>
+        {% for e in enrollments %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ e.student_id }} / {{ e.roll_number }}</td>
+            <td>{{ e.student_name }}</td>
+            <td>{{ e.course_id }} / {{ e.course_code }}</td>
+            <td>{{ e.course_name }}</td>
+            <td>
+              <form action="/enrollments/{{ e.enrollment_id }}/delete" method="post" style="display:inline">
+                <button type="submit">Withdraw</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+{% endblock %}

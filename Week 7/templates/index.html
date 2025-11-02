@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Home - Week7{% endblock %}
+{% block content %}
+<div style="margin:10px;">
+  <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+    <h3>Students list</h3>
+    <div><a href="{{ url_for('courses') }}">Go to Courses</a></div>
+  </div>
+
+  {% if students is defined and students|length > 0 %}
+    <table border="0" cellpadding="4" cellspacing="0">
+      <tr>
+        <th>SNo</th>
+        <th>Roll Number</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Actions</th>
+      </tr>
+      {% for s in students %}
+      <tr>
+        <td>{{ loop.index }}</td>
+          <td><a href="/student/{{ s.student_id }}">{{ s.roll_number }}</a></td>
+        <td>{{ s.first_name }}</td>
+        <td>{{ s.last_name }}</td>
+        <td>
+            <a href="/student/{{ s.student_id }}/update">Update</a>
+            &nbsp;
+            <a href="/student/{{ s.student_id }}/delete">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+      <p><a href="/student/create">+ Add Student</a></p>
+
+  {% else %}
+  <p>No student found. Add the students now!</p>
+  <p><a href="/student/create">+ Add Student</a></p>
+  {% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Add a Course{% endblock %}
+{% block content %}
+  <h1>{{ 'Update Course' if course else 'Add a Course' }}</h1>
+  <form method="post" id="{{ form_id if form_id else '' }}" action="{{ action_url if action_url else '' }}">
+    <div>
+      <label>Course Code:</label><br />
+      <input type="text" name="code" value="{{ course.course_code if course else '' }}" {% if disable_code %}disabled{% endif %} required />
+    </div>
+    <div>
+      <label>Course Name:</label><br />
+      <input type="text" name="c_name" value="{{ course.course_name if course else '' }}" required />
+    </div>
+    <div>
+      <label>Course Description:</label><br />
+      <input type="text" name="desc" value="{{ course.course_description if course else '' }}" />
+    </div>
+    <div>
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+{% endblock %}

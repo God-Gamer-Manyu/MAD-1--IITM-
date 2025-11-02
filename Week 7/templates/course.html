@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Course Details{% endblock %}
+{% block content %}
+  {% if error %}
+    <div>{{ error }}</div>
+    <p><a href="/">Go Back</a></p>
+  {% else %}
+    <h1>Course Details</h1>
+    <table id="course-detail">
+      <thead>
+        <tr><th>Course Code</th><th>Course Name</th><th>Course Description</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ course.course_code }}</td>
+          <td>{{ course.course_name }}</td>
+          <td>{{ course.course_description or '' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    {% if details and details|length > 0 %}
+      <h3>Enrollment list</h3>
+      <table id="course-table">
+        <thead>
+          <tr><th>SNo</th><th>Roll Number</th><th>Student First Name</th><th>Student Last Name</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          {% for s in details %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ s.roll_number }}</td>
+              <td>{{ s.first_name }}</td>
+              <td>{{ s.last_name or '' }}</td>
+              <td><a href="#">Withdraw</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
+    <p><a href="/courses">Go Back</a></p>
+  {% endif %}
+{% endblock %}

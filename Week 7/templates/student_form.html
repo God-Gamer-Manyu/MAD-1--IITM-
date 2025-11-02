@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Add a Student{% endblock %}
+{% block content %}
+  <h1>{{ 'Update Student' if student else 'Add a Student' }}</h1>
+  <form method="post" id="{{ form_id if form_id else '' }}" action="{{ action_url if action_url else '' }}">
+    <div>
+      <label>Roll Number:</label><br />
+      <input type="text" name="roll" value="{{ student.roll_number if student else '' }}" {% if disable_roll %}disabled{% endif %} required />
+    </div>
+    <div>
+      <label>First Name:</label><br />
+      <input type="text" name="f_name" value="{{ student.first_name if student else '' }}" required />
+    </div>
+    <div>
+      <label>Last Name:</label><br />
+      <input type="text" name="l_name" value="{{ student.last_name if student else '' }}" />
+    </div>
+    <div>
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+{% endblock %}
